@@ -1,0 +1,8 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  },
+  "textMessage": "You have pushed the button this many times:",
+  "newDueDate": "Select a new due date"
+}
