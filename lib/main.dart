@@ -156,6 +156,8 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         tooltip: 'Increment',
         onPressed: () {
           _incrementCounter();
+
+          /// This shows localization of system dialogs
           _pickDate();
         },
         child: const Icon(Icons.add),

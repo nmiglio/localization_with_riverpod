@@ -1,16 +1,7 @@
 # test_gui
 
-A new Flutter project.
+This is a proof of concept on how to use riverpod to achieve localization of the app.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The gui will react to a change of locale triggered via system settings and via the action button on the app bar.
+The button will toggle through the supported languages (english and german).
+The floating button will show a system dialog (date picker) to verify that also this the proper locale is set (names/date format/text buttons).
