@@ -101,6 +101,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       locale: lang,
       keyboardType: const TextInputType.numberWithOptions(),
     );
+    debugPrint(selectedDate.toString());
   }
 
   @override
