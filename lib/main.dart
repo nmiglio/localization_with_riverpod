@@ -66,6 +66,19 @@ class MyHomePage extends ConsumerStatefulWidget {
 class _MyHomePageState extends ConsumerState<MyHomePage> {
   int _counter = 0;
 
+  static List<String> menuItems = AppLocalizations.supportedLocales
+      .map((Locale loc) => loc.languageCode)
+      .toList();
+
+  final List<PopupMenuItem<String>> _popUpMenuItems = menuItems
+      .map(
+        (String value) => PopupMenuItem<String>(
+          value: value,
+          child: Text(value),
+        ),
+      )
+      .toList();
+
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -74,8 +87,8 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
   void _pickDate() async {
     //debugPrint()
-    final loc = ref.read(appLocalizationsProvider);
     final lang = ref.read(appLanguageProvider);
+    final loc = ref.read(appLocalizationsProvider);
     DateTime dateNow = DateTime.now();
     final DateTime? selectedDate = await showDatePicker(
       context: context,
@@ -83,7 +96,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       firstDate: DateTime(dateNow.year - 1),
       lastDate: DateTime(dateNow.year + 2),
       helpText: loc.newDueDate,
-      errorFormatText: 'Enter valid date',
+      errorFormatText: 'Enter a valid date',
       errorInvalidText: 'Enter date in valid range',
       locale: lang,
       keyboardType: const TextInputType.numberWithOptions(),
@@ -99,19 +112,19 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         foregroundColor: Colors.white,
         title: Text(widget.title),
         actions: [
-          Consumer(
-              builder: (BuildContext context, WidgetRef ref, Widget? child) {
-            return IconButton(
-              icon: const Icon(
-                Icons.translate,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                debugPrint('Change Language');
-                ref.read(appLanguageProvider.notifier).toggleAppLanguage();
-              },
-            );
-          }),
+          PopupMenuButton<String>(
+            icon: const Icon(
+              Icons.translate,
+              color: Colors.white,
+            ),
+            onSelected: (String newValue) {
+              debugPrint(newValue);
+              ref
+                  .read(appLanguageProvider.notifier)
+                  .setAppLanguage(Locale(newValue));
+            },
+            itemBuilder: (BuildContext context) => _popUpMenuItems,
+          ),
         ],
       ),
       body: Center(
