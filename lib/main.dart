@@ -70,14 +70,33 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       .map((Locale loc) => loc.languageCode)
       .toList();
 
+  // Image.asset('icons/flags/png100px/de.png', package: 'country_icons'),
+  // Image.asset('icons/flags/png100px/gb.png', package: 'country_icons'),
+
   final List<PopupMenuItem<String>> _popUpMenuItems = menuItems
       .map(
-        (String value) => PopupMenuItem<String>(
-          value: value,
-          child: Text(value),
+        (String cCode) => PopupMenuItem<String>(
+          value: cCode,
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(cCode),
+            getFlagFromLanguage(cCode),
+          ]),
         ),
       )
       .toList();
+
+  static Widget getFlagFromLanguage(String lang) {
+    switch (lang) {
+      case 'de':
+        return Image.asset('icons/flags/png100px/de.png',
+            package: 'country_icons', width: 40);
+      case 'en':
+        return Image.asset('icons/flags/png100px/gb.png',
+            package: 'country_icons', width: 40);
+    }
+    return const Placeholder(fallbackHeight: 15, fallbackWidth: 40);
+  }
 
   void _incrementCounter() {
     setState(() {
